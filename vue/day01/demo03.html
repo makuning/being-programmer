@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <span>
+            {{ message }}
+        </span>
+        <button v-on:click="reverseMessage">反转消息</button>
+        <my-component v-bind:student="student"></my-component>
+    </div>
+</body>
+<script>
+    Vue.component('my-component', {
+        props: ['student'],
+        template: `
+        <div>
+            <p>{{ student.name }}</p>
+            <p>{{ student.gender }}</p>
+            <p>{{ student.age }}</p>
+        </div>
+        `
+    })
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello World!!!',
+            student: {
+                name: '张三',
+                gender: '男',
+                age: 17
+            }
+        },
+        methods: {
+            reverseMessage: function () {
+                this.message = this.message.split('').reverse().join('')
+            }
+        }
+    })
+</script>
+
+</html>
